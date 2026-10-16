@@ -1,26 +1,23 @@
 # arkDasm
 
-Interactive disassembler for PE32+ executables and debugger for x64 Windows.
+arkDasm is an interactive disassembler, decompiler and debugger for 64-bit Windows executables.
+
+![arkDasm main window: disassembly and decompiled C side by side](img/main_window.png)
+
+**See the decompiler on a real binary:** [WindowsTerminal.exe showcase](showcase/x64Deer_WindowsTerminal.md)
 
 ![Demo](img/demo.gif)
 
 ## Features
 
-- x86-64 disassembly with auto-generated comments and labels
-- Local debugger with breakpoints and memory snapshots
-- MCP server — drive arkDasm from an AI assistant, over the Model Context Protocol
-- Functions, imports, and exports listing
-- Cross-reference viewer
-- Rename symbols and add comments
-- Code analysis and procedure detection
-- Export disassembly to `.asm` file
-- Embedded Python scripting console
-- Support for conditional software breakpoints
+- x86-64 disassembly (Zydis) with auto-generated comments and labels, jump arrows and procedure detection
+- Interactive x64 decompiler, own engine (no Ghidra): rename variables, add comments, follow calls in the C view
+- Local debugger: conditional breakpoints, stepping, memory snapshots, WinDbg-style commands
+- Debugging on the decompiled C, no source code needed: step over and into C lines, breakpoints and Run to cursor on C lines
+- Navigation: cross-references, functions, imports and exports, strings, bookmarks
+- MCP server: drive arkDasm from an AI assistant, decompiled C included (read it, name its variables), and the debugger: start, step, patch and terminate the debuggee round after round, with permissions granted per group
 - PDB debug symbol loading
-- Customizable colors and fonts
-- Bookmarks
-- Hex view
-- Save/load project database
+- Save and export: project database (names, comments, bookmarks), `.asm` export, all functions as a `.c` file
 
 ## Keyboard shortcuts
 
@@ -34,6 +31,7 @@ Interactive disassembler for PE32+ executables and debugger for x64 Windows.
 | Jump to entrypoint | Ctrl + e |
 | Add bookmark | Alt + m |
 | Show bookmarks | Ctrl + m |
+| Decompile subroutine and switch to Decompile window | Tab |
 
 ### Disassembly window — Edit
 
@@ -54,6 +52,19 @@ Interactive disassembler for PE32+ executables and debugger for x64 Windows.
 |---|---|
 | Enter comment | ; |
 | Show xref to address | x |
+
+### Decompile window
+
+| Action | Shortcut |
+|---|---|
+| Decompile function and show the Decompile window | Alt + 8 |
+| Jump to the line's address in the disassembly | Tab |
+| Follow symbol (decompile the called function, or show data / import in the disassembly) | Enter or double-click |
+| Back to the previous function | Esc |
+| Rename function, global or variable | n |
+| Enter comment (shared with the disassembly) | / or ; |
+
+Variable names are kept per function in the database; right-click → *Reset variable names in this function* gives the decompiler's names back.
 
 ### Debugger
 
@@ -82,4 +93,4 @@ Interactive disassembler for PE32+ executables and debugger for x64 Windows.
 
 ## License
 
-Freeware. Closed source — only the compiled `.exe` is distributed.
+Freeware. Closed source.
